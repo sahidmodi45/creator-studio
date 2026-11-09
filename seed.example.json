@@ -1,0 +1,41 @@
+{
+  "workspace": {
+    "slug": "demo",
+    "name": "Demo Creator",
+    "clientFirstName": "Demo",
+    "instagramHandle": "democreator",
+    "profileName": "Demo",
+    "bio": "Home cook and weekend explorer\nRecipes, places and everyday life",
+    "followers": 1200,
+    "following": 300,
+    "pillars": ["Quick recipes", "Eating out", "Everyday life"]
+  },
+  "followerSnapshots": [{ "capturedOn": "2026-01-01", "followers": 1200 }],
+  "feedLayouts": [{ "name": "Version 1", "sharedWithClient": true }],
+  "brandDocs": [
+    {
+      "title": "Positioning",
+      "body": "Proposed direction, not yet confirmed by the client.\n\nThe line: one clear sentence about who this creator is and why people follow."
+    },
+    {
+      "title": "Content pillars",
+      "body": "Draft, not yet confirmed by the client.\n\n- Quick recipes: 40%\n- Eating out: 30%\n- Everyday life: 30%"
+    },
+    {
+      "title": "Reel series",
+      "body": "Named series build habit. People follow for the next episode.\n\nExample series: a weekly recipe in under 60 seconds."
+    },
+    {
+      "title": "Voice",
+      "body": "Warm, direct and a little playful. Scripts should sound like the creator talking, not like a brand."
+    },
+    {
+      "title": "Weekly rhythm and what to track",
+      "body": "Three reels and one carousel a week.\n\nTrack saves, shares, non-follower reach and profile visits to follows."
+    },
+    {
+      "title": "Feed aesthetic",
+      "body": "Same cover style for each series, so a series is recognisable in the grid."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+# Netlify settings for the studio.
+[build]
+  command = "npm run build"
+  # The Next.js runtime expects .next.
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Netlify scans built files for secret values. These are not secrets, so they may appear.
+  SECRETS_SCAN_OMIT_KEYS = "APP_URL,STORAGE_DRIVER,NEXT_PUBLIC_STUDIO_NAME"
+
+# The Next.js runtime. Without it the deploy has no server functions and every page is a 404.
+# Pinned in package.json devDependencies so builds are repeatable.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
