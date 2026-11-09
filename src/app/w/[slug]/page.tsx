@@ -1,6 +1,6 @@
 import { and, asc, count, eq } from "drizzle-orm";
 import { Radio, BarChart3, BookOpen, Calendar, Clapperboard, FileText, FolderOpen, Image as ImageIcon, Lightbulb, LayoutGrid, Mic, Palette, Bookmark, Video } from "lucide-react";
-import { Box, BoxLine, MiniFeed, Swatches, Thumbs } from "@/components/boxes";
+import { Box, BoxLine, InstaProfile, MiniFeed, Swatches, Thumbs } from "@/components/boxes";
 import { db } from "@/db";
 import { brandDocs, creativeRequests } from "@/db/schema";
 import { requireWorkspace } from "@/lib/auth";
@@ -72,7 +72,17 @@ export default async function ClientHome({ params }: { params: Promise<{ slug: s
         </Box>
 
         <Box id="current" href={`${base}/feed#current`} title="Current feed" icon={<Radio {...ICON} />} size="tall" example={!liveSlots.length && "current"}>
-          {liveSlots.length ? <MiniFeed slots={liveSlots.map((slot, position) => ({ ...slot, position }))} /> : <BoxLine quiet>What is on your profile now. Your team will add it here.</BoxLine>}
+          {liveSlots.length ? <InstaProfile slots={liveSlots} profile={{
+            instagramHandle: workspace.instagramHandle,
+            profileName: workspace.profileName,
+            bio: workspace.bio,
+            profileLink: workspace.profileLink,
+            followers: workspace.followers,
+            following: workspace.following,
+            postCount: workspace.postCount ?? liveSlots.length,
+            avatarAssetId: workspace.avatarAssetId,
+            firstName: workspace.clientFirstName,
+          }} /> : <BoxLine quiet>What is on your profile now. Your team will add it here.</BoxLine>}
         </Box>
 
         <Box id="ideas" href={`${base}/ideas`} title="Share an idea" icon={<Lightbulb {...ICON} />} tone="blush" count={ideas.value || undefined}>

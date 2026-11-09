@@ -3,6 +3,7 @@ import { AssetIcon, fileUrl } from "@/components/media";
 import type { FeedSlotView, PublicAsset } from "@/lib/queries";
 import { isImage } from "@/lib/constants";
 import { SectionExample, type SectionId } from "@/components/section-examples";
+import { KindIcon, ProfileHeader, type ProfileView } from "@/components/instagram";
 
 /** One tile on a home screen. The whole tile is the link, and its body shows what is really inside. */
 export function Box({
@@ -83,6 +84,29 @@ export function Swatches({ colors }: { colors: string[] }) {
   return (
     <div className="swatches">
       {colors.slice(0, 6).map((color) => <span key={color} className="swatch" style={{ background: color }} title={color} />)}
+    </div>
+  );
+}
+
+/** Her profile as it looks on Instagram: header, bio and the newest posts, in a small phone frame. */
+export function InstaProfile({ profile, slots }: { profile: ProfileView; slots: FeedSlotView[] }) {
+  return (
+    <div className="phone phone-mini" aria-label={`${profile.instagramHandle ?? profile.firstName} on Instagram`}>
+      <ProfileHeader profile={profile} plannedCount={0} />
+      <div className="ig-grid">
+        {slots.slice(0, 9).map((slot) => {
+          // The same picture the feed planner shows: an image, otherwise a video's cover frame.
+          const image = slot.media.find((asset) => isImage(asset.mimeType)) ?? slot.media.find((asset) => asset.thumbnailKey);
+          const src = image ? fileUrl(image.id, image.thumbnailKey ? { thumb: true } : undefined) : null;
+          return (
+            <div key={slot.id} className="tile">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {src && <img src={src} alt="" loading="lazy" />}
+              <span className="tile-kind"><KindIcon kind={slot.kind} /></span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

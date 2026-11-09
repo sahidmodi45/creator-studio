@@ -1,6 +1,7 @@
 import { and, count, eq, isNull } from "drizzle-orm";
 import Link from "next/link";
 import { RailNav, type RailGroup } from "@/components/rail-nav";
+import { WorkspaceTheme } from "@/components/workspace-theme";
 import { NotificationBell } from "@/components/ui";
 import { db } from "@/db";
 import { assets, creativeRequests, tasks } from "@/db/schema";
@@ -58,6 +59,7 @@ export default async function AdminWorkspaceLayout({ children, params }: { child
   return (
     <UploadsProvider enabled={uploadsEnabled()}>
     <div className="admin-shell">
+      <WorkspaceTheme colors={workspace.brandColors} fonts={workspace.brandFonts} />
       <aside className="rail">
         <div className="row-between">
           <Link href={base} className="brandmark">{workspace.clientFirstName} <em>Studio</em></Link>

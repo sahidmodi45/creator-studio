@@ -1,7 +1,7 @@
 import { and, asc, count, eq, isNull } from "drizzle-orm";
 import { BarChart3, Bookmark, Calendar, Clapperboard, FileText, FolderOpen, Image as ImageIcon, LayoutGrid, ListChecks, Mic, Palette, Radio, Sparkles, Users, Video, Lightbulb } from "lucide-react";
 import Link from "next/link";
-import { Box, BoxLine, MiniFeed, Swatches, Thumbs } from "@/components/boxes";
+import { Box, BoxLine, InstaProfile, MiniFeed, Swatches, Thumbs } from "@/components/boxes";
 import { db } from "@/db";
 import { brandDocs, contentItems, creativeRequests, feedLayouts, tasks } from "@/db/schema";
 import { requireTeam } from "@/lib/auth";
@@ -86,7 +86,17 @@ export default async function AdminHome({ params }: { params: Promise<{ slug: st
         </Box>
 
         <Box id="current" href={`${base}/feed#current`} title="Current feed" icon={<Radio {...ICON} />} size="tall">
-          {liveSlots.length ? <MiniFeed slots={liveSlots.map((slot, position) => ({ ...slot, position }))} /> : <BoxLine quiet>Add the posts live on her profile now.</BoxLine>}
+          {liveSlots.length ? <InstaProfile slots={liveSlots} profile={{
+            instagramHandle: workspace.instagramHandle,
+            profileName: workspace.profileName,
+            bio: workspace.bio,
+            profileLink: workspace.profileLink,
+            followers: workspace.followers,
+            following: workspace.following,
+            postCount: workspace.postCount ?? liveSlots.length,
+            avatarAssetId: workspace.avatarAssetId,
+            firstName: workspace.clientFirstName,
+          }} /> : <BoxLine quiet>Add the posts live on her profile now.</BoxLine>}
         </Box>
 
         <Box id="requests" href={`${base}/requests`} title="Ideas" icon={<Lightbulb {...ICON} />} tone={requests.length ? "blush" : ""} count={requests.length ? `${requests.length} new` : undefined}>

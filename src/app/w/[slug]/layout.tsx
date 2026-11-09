@@ -2,6 +2,7 @@ import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { NavLink, NotificationBell } from "@/components/ui";
 import { UploadsProvider } from "@/components/uploads-gate";
+import { WorkspaceTheme } from "@/components/workspace-theme";
 import { signOut } from "@/lib/actions/auth";
 import { requireWorkspace } from "@/lib/auth";
 import { uploadsEnabled } from "@/lib/storage";
@@ -16,6 +17,7 @@ export default async function ClientLayout({ children, params }: { children: Rea
   return (
     <UploadsProvider enabled={uploadsEnabled()}>
     <div className="client-shell">
+      <WorkspaceTheme colors={workspace.brandColors} fonts={workspace.brandFonts} />
       {isTeam && (
         <div className="row-between small" style={{ background: "var(--ink)", color: "#fff", padding: "6px 20px" }}>
           <span>You are seeing what {workspace.clientFirstName} sees.</span>
